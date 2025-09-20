@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'home#index'
   get "quiz/index"
   get "quiz/show"
   get "quiz/result"
