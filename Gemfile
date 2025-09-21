@@ -69,6 +69,4 @@ gem "cssbundling-rails", "~> 1.4"
 
 gem "tailwindcss-rails"
 
-group :production do
-  gem "pg"
-end
+
