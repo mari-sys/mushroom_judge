@@ -1,2 +1,68 @@
-<h1>Quiz#result</h1>
-<p>Find me in app/views/quiz/result.html.erb</p>
+<section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-orange-50 via-amber-50 to-yellow-100">
+  <div class="absolute inset-0 pointer-events-none opacity-20 bg-[url('/assets/quiz/leaves-pattern.png')] bg-repeat"></div>
+  <section class="max-w-3xl mx-auto p-6">
+  <header class="text-center mb-6">
+    <h1 class="text-3xl font-bold mb-2">結果発表</h1>
+    <p class="text-lg">あなたのスコアは <strong><%= @score %> / <%= question_count %></strong> です。</p>
+  </header>
+
+  <div class="bg-white shadow rounded-xl p-4 text-center mb-8">
+    <p class="text-gray-500 text-sm">獲得した称号</p>
+    <p class="text-2xl font-bold text-purple-600 mb-4"><%= @title %></p>
+    <%= link_to '最初からもう一度挑戦',
+                quiz_path,
+                class: "inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md transition" %>
+
+     <%= link_to "Xで結果をシェア", "#",
+      class: "inline-block px-4 py-2 rounded-md text-center font-semibold transition border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white",
+
+      data: {
+        text: "🍄 秋のきのこJugde\n#{@score} / #{question_count} 問正解！\n称号：#{@title}\n#きのこクイズ #秋アプリ",
+        url:  request.url
+      },
+      onclick: "shareResult(this.dataset.text, this.dataset.url); return false;" %>
+
+<script nonce="<%= content_security_policy_nonce %>">
+  function shareResult(text, url) {
+    const title = "秋のきのこjugde";
+    if (navigator.share) {
+      navigator.share({ title, text, url }).catch(() => {
+        const intent = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(url);
+        window.open(intent, "_blank", "noopener,noreferrer");
+      });
+      return;
+    }
+    const intent = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(url);
+    window.open(intent, "_blank", "noopener,noreferrer");
+  }
+</script>
+  </div>
+
+  <section>
+    <h2 class="text-xl font-semibold mb-4">復習</h2>
+    <ol class="space-y-4">
+      <% @question_results.each do |result| %>
+        <% bg_class = result[:correct].nil? ? "bg-gray-100"
+                     : result[:correct] ? "bg-green-100 border-green-400"
+                     : "bg-red-100 border-red-400" %>
+
+        <li class="flex gap-4 p-4 border rounded-lg <%= bg_class %>">
+          <div class="flex-shrink-0 w-20">
+            <%= image_tag(result[:question][:image_path], alt: result[:question][:name], class: "rounded-lg") %>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-lg font-bold">
+              第<%= result[:number] %>問：<%= result[:question][:name] %>
+            </h3>
+            <p class="text-gray-700 mb-2"><%= result[:question][:description] %></p>
+            <p>
+              あなたの回答：
+              <span class="font-semibold"><%= quiz_choice_label(result[:choice]) %></span>
+              <%= quiz_badge(result[:correct]) %>
+            </p>
+          </div>
+        </li>
+      <% end %>
+    </ol>
+  </section>
+</section>

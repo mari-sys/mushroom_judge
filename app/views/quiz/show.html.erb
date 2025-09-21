@@ -1,2 +1,42 @@
-<h1>Quiz#show</h1>
-<p>Find me in app/views/quiz/show.html.erb</p>
+<section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-orange-50 via-amber-50 to-yellow-100">
+  <div class="absolute inset-0 pointer-events-none opacity-20 bg-[url('/assets/quiz/leaves-pattern.png')] bg-repeat"></div>
+
+  <div class="relative z-10 w-full max-w-xl px-4 py-8"><section class="mx-auto max-w-xl px-4 py-8">
+  <header class="text-center">
+    <h1 class="text-xs font-semibold uppercase tracking-wide text-gray-500">
+      第<%= @question_number %>問 / 全<%= question_count %>問
+    </h1>
+    <p class="mt-2 text-lg font-medium text-gray-700">
+      このきのこは食べられるでしょうか？
+    </p>
+  </header>
+
+  <article class="mt-6 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+    <div class="aspect-[4/3] w-full overflow-hidden rounded-xl bg-gray-100 ring-1 ring-gray-200">
+      <%= image_tag @question_image_path,
+            alt: "きのこ判定画像",
+            class: "h-full w-full object-contain" %>
+    </div>
+
+    <% if flash[:alert].present? %>
+      <p class="mt-4 text-center text-sm font-medium text-red-600">
+        <%= flash[:alert] %>
+      </p>
+    <% end %>
+
+    <%= form_with url: quiz_answer_path, method: :post, class: "mt-6", local: true do |form| %>
+      <%= hidden_field_tag :number, @question_number %>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <%= form.button "食用",
+              name: :choice,
+              value: "edible",
+              class: "inline-flex items-center justify-center rounded-xl border border-emerald-600 px-5 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-300 active:bg-emerald-100" %>
+
+        <%= form.button "毒きのこ",
+              name: :choice,
+              value: "poisonous",
+              class: "inline-flex items-center justify-center rounded-xl border border-rose-600 px-5 py-3 text-base font-semibold text-rose-700 shadow-sm transition hover:bg-rose-50 focus:outline-none focus:ring-2 focus:ring-rose-300 active:bg-rose-100" %>
+      </div>
+    <% end %>
+  </article>
+</section>
