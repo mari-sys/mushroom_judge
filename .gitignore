@@ -44,3 +44,4 @@
 .byebug_history
 *.swp
 .DS_Store
+/bin/dev
