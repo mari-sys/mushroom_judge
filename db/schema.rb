@@ -10,13 +10,5 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_20_051217) do
-  create_table "mushrooms", force: :cascade do |t|
-    t.string "name"
-    t.boolean "is_poisonous"
-    t.string "image_url"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema[8.0].define(version: 2025_09_20_235053) do
 end

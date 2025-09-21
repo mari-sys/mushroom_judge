@@ -1,0 +1,8 @@
+/* Tailwind v4 の既定変数と直接指定の両方を制圧 */
+:root {
+  --default-font-family: "Kaisei Decol", serif;
+}
+
+html {
+  font-family: "Kaisei Decol", serif !important;
+}

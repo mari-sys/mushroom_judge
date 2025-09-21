@@ -1,2 +1,35 @@
-<h1>Quiz#index</h1>
-<p>Find me in app/views/quiz/index.html.erb</p>
+<section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-orange-50 via-amber-50 to-yellow-100">
+  <div class="absolute inset-0 pointer-events-none opacity-20 bg-[url('/assets/quiz/leaves-pattern.png')] bg-repeat"></div>
+
+  <div class="relative z-10 mx-auto w-full max-w-2xl px-6">
+    <header class="text-center mb-8">
+      <h1 class="text-3xl font-extrabold text-amber-900 drop-shadow-sm">🍄 秋のきのこJugde</h1>
+      <p class="mt-2 text-amber-800">秋色の森へようこそ。10問に挑戦して称号をゲットしよう！</p>
+    </header>
+
+    <article class="rounded-2xl bg-white/90 shadow-md ring-1 ring-amber-100 p-6 backdrop-blur-sm">
+      <h2 class="text-lg font-semibold text-amber-900">ルール</h2>
+      <ol class="mt-3 list-decimal space-y-2 pl-6 text-amber-900/90">
+        <li>全10問。表示された写真を見て <span class="font-semibold">「食用」</span> か <span class="font-semibold">「毒きのこ」</span> を選びます。</li>
+        <li>結果画面で名前・説明が公開され、復習できます。</li>
+        <li>スコアに応じて <span class="font-semibold">称号</span> が授与されます。</li>
+      </ol>
+
+      <div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div class="rounded-xl bg-emerald-50/70 p-3 ring-1 ring-emerald-100">
+          <p class="text-sm text-emerald-800">食用なら <span class="font-semibold">食用</span> ボタン</p>
+        </div>
+        <div class="rounded-xl bg-rose-50/70 p-3 ring-1 ring-rose-100">
+          <p class="text-sm text-rose-800">危険だと思ったら <span class="font-semibold">毒きのこ</span> ボタン</p>
+        </div>
+      </div>
+
+      <div class="mt-8 text-center">
+        <%= link_to '第1問へ進む',
+          quiz_question_path(number: 1),
+          class: "inline-flex items-center justify-center gap-2 rounded-xl bg-amber-600 px-6 py-3 text-lg font-semibold text-white shadow transition hover:bg-amber-700 hover:shadow-lg active:bg-amber-800" %>
+      </div>
+      </p>
+    </article>
+  </div>
+</section>
