@@ -66,3 +66,5 @@ end
 gem "image_processing", "~> 1.2"
 
 gem "cssbundling-rails", "~> 1.4"
+
+gem "tailwindcss-rails"
